@@ -1,7 +1,7 @@
 'use strict';
 
 const mem = require('./memory.js');
-const memory = mem();
+const memory = new mem();
 
 class Array {
   constructor() {
