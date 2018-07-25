@@ -33,8 +33,35 @@ console.log(urlify('albert sare sonya slegers'));
 //     arr.splice(0, index);
 //   } 
 //   return arr;
-    
 // }
 
 // console.log(filterArray([1, 8, 3, 2, 5, 6, 7, 8, 5, 21], 5));
 
+/*
+
+Max sum in the array
+You are given an array containing positive and negative integers. Write an algorithm which will find the largest sum in a continuous sequence.
+
+Input: [4,6,-3,5,-2,1]
+Output: 12
+
+*/
+
+/*
+function findMaxSum(arr) {
+  // initialize highest sum
+  let current = 0;
+  let high = 0;
+  // loop thru arr
+  for (let i = 0; i < arr.length; i++) {
+    current += arr[i];
+    // add current element to current total, see if it's higher or lower, record if higher
+    if (current > high) {
+      high = current;
+    }
+  }
+  // return highest sum
+  return high;
+}
+console.log(findMaxSum([4,6,-3,5,-2,1]));
+*/
