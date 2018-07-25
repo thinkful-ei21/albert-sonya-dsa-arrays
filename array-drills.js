@@ -1,86 +1,49 @@
 'use strict';
 
-const mem = require('./memory.js');
-const memory = new mem();
+const Array = require('./array-implementation.js');
 
-class Array {
-  constructor() {
-    this.length = 0;
-    this._capacity = 0;
-    this.ptr = memory.allocate(this.length);
-  }
 
-  _resize(size) {
-    const oldPtr = this.ptr;
-    this.ptr = memory.allocate(size);
-    if (this.ptr === null) {
-      throw new Error('Out of memory');
-    }
-    memory.copy(this.ptr, oldPtr, this.length);
-    memory.free(oldPtr);
-    this._capacity = size;
-  }
+function main() {
+  Array.SIZE_RATIO = 3;
 
-  get(index) {
-    // check for index error
-    if (index < 0 || index > this.length) {
-      throw new Error('Index error');
-    }
-    // retrieve and return value by accessing memory via pointer plus current index
-    return memory.get(this.ptr + index);
-  }
+  //create an instance of the array class
+  let arr = new Array();
 
-  pop() {
-    // check for index error
-    if (this.length === 0) {
-      throw new Error('Index error');
-    }
-    // grab to-be popped value
-    const poppedValue = memory.get(this.ptr + this.length - 1);
-    // decrease length
-    this.length--;
-    // return popped value
-    return poppedValue;
-  }
+  //add an item to the array
+  // arr.push(3);
+  // arr.push(5);
+  // arr.push(15);
+  // arr.push(19);
+  // arr.push(45);
+  // arr.push(10);
 
-  push(value) {
-    // check to see if resize is needed
-    if (this.length >= this._capacity) {
-      this._resize((this.length + 1) * Array.SIZE_RATIO);
-    }
-    // set value to memory location
-    memory.set(this.ptr + this.length, value);
-    // increase length
-    this.length++;
-  }
+  // arr.pop();
+  // arr.pop();
+  // arr.pop();
 
-  insert(index, value) {
-    // check for index error
-    if (index < 0 || index >= this.length) {
-      throw new Error('Index error');
-    }
-    // check for resize
-    if (this.length >= this._capacity) {
-      this._resize((this.length + 1) * Array.SIZE_RATIO);
-    }
-    // copy from old location to new
-    memory.copy((this.ptr + index + 1), (this.ptr + index), (this.length - index));
-    // insert value to target location
-    memory.set((this.ptr + index), value);
-    // increase the length
-    this.length++;
-  }
+  // console.log(arr);
+  // console.log(arr.get(0));
 
-  remove(index) {
-    // check for index error
-    if (index < 0 || index >= this.length) {
-      throw new Error('Index error');
-    }
-    // copy from old location to new
-    memory.copy((this.ptr + index), (this.ptr + index + 1), (this.length - index - 1));
-    // decrease the length
-    this.length--;
-  }
-
+  arr.push('tauhida');
+  console.log(arr.get(0));
 }
-Array.SIZE_RATIO = 3;
+
+main();
+
+
+/*
+
+What is the length, capacity and memory address of your array?
+* at arr.push(3)
+* console prints: Array { length: 1, _capacity: 3, ptr: 0 }
+
+Empty the array and add just one item arr.push("tauhida"); What is the result? Can you explain your result?
+* console prints: NaN
+* This could be because the memory module uses an instance of Float64Array, which is a typed array for storing numbers
+* So if a value is set to that array which is not a number, it will store the value of NaN instead
+
+What is the purpose of the _resize() function in your Array class?
+* _resize() is called when length reaches capacity, so a newer and bigger memory space is needed
+* doing so will give us a new pointer, and 'head' in memory will be increased by 'size' so we can use up to capacity before having to call resize again
+
+*/
