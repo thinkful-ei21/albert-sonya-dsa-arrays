@@ -19,3 +19,22 @@ function urlify(str) {
 // this function should be O(n), linear time
 console.log(urlify('albert sare sonya slegers'));
 */
+
+// Filtering an array
+
+// remove all numbers less than 5 from an array
+
+// function filterArray(arr, value) {
+//   // sort array an find index of value if it exists
+//   let index = arr.sort((a, b) => a > b).indexOf(value);
+//   if (index === -1) {
+//     return arr;
+//   } else {
+//     arr.splice(0, index);
+//   } 
+//   return arr;
+    
+// }
+
+// console.log(filterArray([1, 8, 3, 2, 5, 6, 7, 8, 5, 21], 5));
+
